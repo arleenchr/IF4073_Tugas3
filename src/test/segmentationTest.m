@@ -5,7 +5,7 @@ end
 img = double(img) / 255;
 figure; imshow (img);
 
-edges = edgeDetection(img, 'sobel');
+edges = edgeDetection(img, 'laplace');
 figure; imshow(edges);
 %segmentedImage = segmentation(img, 'laplace', 0.2);
 %figure; imshow(segmentedImage);

@@ -5,7 +5,7 @@ function edges = edgeDetection(image, operator)
             kernel = [1 1 1; 1 -8  1; 1  1  1];
             %kernel = [0 -1 0; -1 4 -1; 0 -1 0];
             %kernel = [-1 -1 -1; -1 8 -1; -1 -1 -1];
-            edges = uint8(conv2(double(rgb2gray(image)), double(kernel), 'same'));
+            edges = conv2(double(image), double(kernel), 'same');
         case 'log'
             edges = [];
         case 'sobel'
@@ -15,7 +15,11 @@ function edges = edgeDetection(image, operator)
             convY = conv2(double(image), double(kernelY), 'same');
             edges = sqrt(convX.^2 + convY.^2);
         case 'prewitt'
-            edges = [];
+            kernelX = [-1 0 1; -1 0 1; -1 0 1];
+            kernelY = [-1 -1 -1; 0 0 0; 1 1 1];
+            convX = conv2(double(image), double(kernelX), 'same');
+            convY = conv2(double(image), double(kernelY), 'same');
+            edges = sqrt(convX.^2 + convY.^2);
         case 'roberts'
             edges = [];
         case 'canny'
