@@ -9,7 +9,11 @@ function edges = edgeDetection(image, operator)
         case 'log'
             edges = [];
         case 'sobel'
-            edges = [];
+            kernelX = [-1 0 1; -2 0 2; -1 0 1];
+            kernelY = [1 2 1; 0 0 0; -1 -2 -1];
+            convX = conv2(double(image), double(kernelX), 'same');
+            convY = conv2(double(image), double(kernelY), 'same');
+            edges = sqrt(convX.^2 + convY.^2);
         case 'prewitt'
             edges = [];
         case 'roberts'
