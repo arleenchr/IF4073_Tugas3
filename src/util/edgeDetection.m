@@ -7,7 +7,12 @@ function edges = edgeDetection(image, operator)
             %kernel = [-1 -1 -1; -1 8 -1; -1 -1 -1];
             edges = conv2(double(image), double(kernel), 'same');
         case 'log'
-            edges = [];
+            kernel = [0 0 -1 0 0;
+                      0 -1 -2 -1 0;
+                      -1 -2 16 -2 -1;
+                      0 -1 -2 -1 0;
+                      0 0 -1 0 0];
+            edges = conv2(double(image), double(kernel), 'same');
         case 'sobel'
             kernelX = [-1 0 1; -2 0 2; -1 0 1];
             kernelY = [1 2 1; 0 0 0; -1 -2 -1];
