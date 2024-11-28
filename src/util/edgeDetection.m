@@ -1,4 +1,8 @@
 function edges = edgeDetection(image, operator)
+    if size(image, 3) == 3
+        image = rgb2gray(image);
+    end
+    
     switch lower(operator)
         case 'laplace'
             %kernel = [0 1 0; 1 -4  1; 0  1  0];
@@ -32,7 +36,7 @@ function edges = edgeDetection(image, operator)
             convY = conv2(double(image), double(kernelY), 'same');
             edges = sqrt(convX.^2 + convY.^2);
         case 'canny'
-            edges = [];
+            edges = (edge(image,'canny') * 255);
         otherwise
             error('Unknown operator: %s', operator);
     end
