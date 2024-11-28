@@ -21,7 +21,11 @@ function edges = edgeDetection(image, operator)
             convY = conv2(double(image), double(kernelY), 'same');
             edges = sqrt(convX.^2 + convY.^2);
         case 'roberts'
-            edges = [];
+            kernelX = [1 0; 0 -1];
+            kernelY = [0 1; -1 0];
+            convX = conv2(double(image), double(kernelX), 'same');
+            convY = conv2(double(image), double(kernelY), 'same');
+            edges = sqrt(convX.^2 + convY.^2);
         case 'canny'
             edges = [];
         otherwise
