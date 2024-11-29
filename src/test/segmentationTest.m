@@ -1,8 +1,8 @@
-img = imread('images/house.jpg');
+img = imread('images/banana.jpg');
 img = double(img) / 255;
 figure; imshow (img);
 
-edges = edgeDetection(img, 'roberts');
+edges = edgeDetection(img, 'prewitt');
 figure; imshow(edges);
 segmentedImage = segmentation(img, edges, 'adaptive');
 figure; imshow(segmentedImage);
