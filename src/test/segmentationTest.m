@@ -1,4 +1,4 @@
-img = imread('images/banana.jpg');
+img = imread('images/house.jpg');
 img = double(img) / 255;
 figure; imshow (img);
 
