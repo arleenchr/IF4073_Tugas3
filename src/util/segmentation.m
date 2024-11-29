@@ -1,19 +1,5 @@
-function segmentedImage = segmentation(image, edges, thresholdType, threshold)
-    % thresholding the edge mask
-    switch lower(thresholdType)
-        case 'adaptive'
-            bwEdges = imbinarize(edges, 'adaptive');
-        case 'otsu'
-            bwEdges = imbinarize(edges, graythresh(image));
-        case 'global'
-            bwEdges = imbinarize(edges, 'global');
-        case 'input'
-            bwEdges = imbinarize(edges, threshold);
-        otherwise
-            error('Unknown threshold type: %s', thresholdType);
-    end
-
-    mask = imclearborder(bwEdges);
+function segmentedImage = segmentation(image, edges)
+    mask = imclearborder(edges);
     mask = imclose(mask, strel('line', 10,0)); % close (connect) adjacent edges
     mask = imfill(mask, 'holes'); % fill areas inside connected edges
     mask = imopen(mask, strel(ones(3, 3)));

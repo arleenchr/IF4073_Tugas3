@@ -1,4 +1,4 @@
-function result = edgeDetection(image, operator)
+function result = edgeDetection(image, operator, thresholdType, threshold)
     if size(image, 3) == 3
         image = rgb2gray(image);
     end
@@ -56,6 +56,20 @@ function result = edgeDetection(image, operator)
             result(paddingHeight:imageHeight - paddingHeight, paddingWidth:imageWidth - paddingWidth) = edges;
         else
             result(paddingHeight + 1:imageHeight - paddingHeight, paddingWidth + 1:imageWidth - paddingWidth) = edges;
+        end
+
+        % thresholding the edge mask
+        switch lower(thresholdType)
+            case 'adaptive'
+                result = imbinarize(result, 'adaptive');
+            case 'otsu'
+                result = imbinarize(result, graythresh(image));
+            case 'global'
+                result = imbinarize(result, 'global');
+            case 'input'
+                result = imbinarize(result, threshold);
+            otherwise
+                error('Unknown threshold type: %s', thresholdType);
         end
     end
 end
