@@ -53,9 +53,9 @@ function result = edgeDetection(image, operator)
         result = zeros(imageHeight, imageWidth);
 
         if strcmpi(operator, 'roberts')
-            result(paddingHeight:imageHeight - paddingHeight, paddingWidth:imageWidth - paddingWidth) = imbinarize(edges);
+            result(paddingHeight:imageHeight - paddingHeight, paddingWidth:imageWidth - paddingWidth) = edges;
         else
-            result(paddingHeight + 1:imageHeight - paddingHeight, paddingWidth + 1:imageWidth - paddingWidth) = imbinarize(edges);
+            result(paddingHeight + 1:imageHeight - paddingHeight, paddingWidth + 1:imageWidth - paddingWidth) = edges;
         end
     end
 end
