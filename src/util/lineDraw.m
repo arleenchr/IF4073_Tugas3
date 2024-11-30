@@ -28,7 +28,7 @@ function drawnLines = lineDraw(lines, M, N, threshold)
                     y = y1;
 
                     for i = 1:step
-                        if 1 <= y && y <= M
+                        if 1 <= x && x <= N && 1 <= y && y <= M
                             drawnLines(round(y), round(x)) = 1;
                         end
 
@@ -39,8 +39,10 @@ function drawnLines = lineDraw(lines, M, N, threshold)
                     % Draw a vertical line
                     x = rho / c;
 
-                    for y = 1:M
-                        drawnLines(y, round(x)) = 1;
+                    if 1 <= x && x <= N
+                        for y = 1:M
+                            drawnLines(y, round(x)) = 1;
+                        end
                     end
                 end
             end
